@@ -41,6 +41,7 @@ const GET_WEATHER = gql`
 export class WeatherPanel extends React.Component {
     constructor(props: any) {
         super(props);
+        this.state = {};
     }
 
     weather(){
