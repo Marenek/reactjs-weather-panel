@@ -1,3 +1,0 @@
-[submodule "src/modules/graphql-weather-api"]
-	path = src/modules/graphql-weather-api
-	url = https://github.com/konstantinmuenster/graphql-weather-api.git
