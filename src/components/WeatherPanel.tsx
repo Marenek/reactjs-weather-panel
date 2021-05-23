@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {getWeatherQuery} from "./WeatherQuery";
+import {getWeatherQuery} from "./WeatherApiData";
 
 // use live version of https://github.com/konstantinmuenster/graphql-weather-api
 const apiUrl = 'https://graphql-weather-api.herokuapp.com/';
