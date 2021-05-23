@@ -1,57 +1,63 @@
 import React from 'react';
 import axios from 'axios';
-import {getWeatherQuery} from "./WeatherApiData";
-
-// use live version of https://github.com/konstantinmuenster/graphql-weather-api
-const apiUrl = 'https://graphql-weather-api.herokuapp.com/';
+import {apiUrl, defaultCity, defaultWeatherData, getWeatherQuery} from "./WeatherApiData";
 
 export class WeatherPanel extends React.Component {
 
     state = {
-        weatherData: {
-            name: '',
-            country: ''
-        }
+        searchCity: defaultCity,
+        weatherData: defaultWeatherData
     };
 
     constructor(props: any) {
         super(props);
+
+        // init state
+        this.setState({});
+
+        // bind function
         this.setWeatherData = this.setWeatherData.bind(this);
+
+        // set weather data
         this.setWeatherData();
     }
 
-    componentDidMount() {
-        // this.setWeatherData();
-        // console.log(this.setWeatherData());
-    }
-
     setWeatherData() {
-        let city = "brno";
         // https://medium.com/@stubailo/how-to-call-a-graphql-server-with-axios-337a94ad6cf9
         axios({
             url: apiUrl,
             method: 'post',
             data: {
-                query: getWeatherQuery(city)
+                query: getWeatherQuery(this.state.searchCity)
             }
         }).then((result) => {
-            console.log(result)
+            // console.log(result)
 
             const weatherData = result.data.data.getCityByName;
-            this.setState({weatherData: weatherData});
-
             console.log(weatherData);
 
-            // city, country
-            console.log(weatherData.name, weatherData.country);
+            if (weatherData) {
+                this.setState({weatherData: weatherData});
 
-            // actual and feelsLike temperature
-            console.log(weatherData.weather.temperature.actual - 273.15, weatherData.weather.temperature.feelsLike - 273.15);
-
-            // date, time
-            const date = new Date(weatherData.weather.timestamp * 1000);
-            console.log(date.toLocaleDateString(), date.toLocaleTimeString());
+            }
         });
+    }
+
+    convertKelvinToCelsius (temperature: any) {
+        if (temperature) {
+            return (temperature - 273.15).toFixed(1);
+        }
+    }
+
+    convertUnixTimestampToDateTime (timestamp: any) {
+        if (timestamp) {
+            const date = new Date(timestamp * 1000);
+            return (
+                <>
+                    {date.toLocaleDateString()}, {date.toLocaleTimeString()}
+                </>
+            );
+        }
     }
 
     render() {
@@ -61,7 +67,16 @@ export class WeatherPanel extends React.Component {
                 <br/>
                 <button onClick={this.setWeatherData}>REFRESH</button>
                 <br/>
-                {this.state.weatherData.name}, {this.state.weatherData.country}
+                {/* ity, country */}
+                {this.state.weatherData.name},
+                {this.state.weatherData.country}
+                <br/>
+                {/* actual and feelsLike temperature */}
+                {this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.actual)} /
+                {this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.feelsLike)}
+                <br/>
+                {/* date time */}
+                {this.convertUnixTimestampToDateTime(this.state.weatherData.weather.timestamp)}
                 <br/>
             </p>
         );
