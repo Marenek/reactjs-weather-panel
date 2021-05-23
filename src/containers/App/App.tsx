@@ -114,6 +114,7 @@ export default class App extends React.Component {
                     <Tile
                         value={this.state.weatherData.weather.wind.speed}
                         unit={' m/s'}
+                        prefixAdd={'Direction '}
                         valueAdd={this.state.weatherData.weather.wind.deg}
                         unitAdd={' °'}
                         title={'Wind'}
