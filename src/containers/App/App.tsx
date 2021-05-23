@@ -18,9 +18,6 @@ export default class App extends React.Component {
         // init state
         this.setState({});
 
-        // bind function
-        this.setWeatherData = this.setWeatherData.bind(this);
-
         // set weather data
         this.setWeatherData();
     }
@@ -39,8 +36,8 @@ export default class App extends React.Component {
         }
     }
 
-    setWeatherData() {
-        // https://medium.com/@stubailo/how-to-call-a-graphql-server-with-axios-337a94ad6cf9
+    // read weather data according to https://medium.com/@stubailo/how-to-call-a-graphql-server-with-axios-337a94ad6cf9
+    setWeatherData = () => {
         axios({
             url: apiUrl,
             method: 'post',
@@ -48,25 +45,20 @@ export default class App extends React.Component {
                 query: getWeatherQuery(this.state.searchCity)
             }
         }).then((result) => {
-            // console.log(result)
-
             const weatherData = result.data.data.getCityByName;
-            console.log(weatherData);
-
             if (weatherData) {
                 this.setState({weatherData: weatherData});
-
             }
         });
     }
 
-    convertKelvinToCelsius (temperature: any) {
+    convertKelvinToCelsius = (temperature: any) => {
         if (temperature) {
             return (temperature - 273.15).toFixed(1);
         }
     }
 
-    convertUnixTimestampToDateTime (timestamp: any) {
+    convertUnixTimestampToDateTime = (timestamp: any) => {
         if (timestamp) {
             const date = new Date(timestamp * 1000);
             return (
