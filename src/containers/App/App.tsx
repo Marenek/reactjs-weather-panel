@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {apiUrl, defaultCity, defaultWeatherData, getWeatherQuery} from "../../components/WeatherApiData";
 import {Tile} from '../../elements/Tile'
+import {SearchCityBar} from '../../components/SearchCityBar'
 import './App.css';
 
 export default class App extends React.Component {
@@ -22,6 +23,20 @@ export default class App extends React.Component {
 
         // set weather data
         this.setWeatherData();
+    }
+
+    // update state with current search input value
+    setSearchCity = (e: any) => {
+        this.setState({
+            searchCity: e.target.value
+        })
+    }
+
+    // search on enter
+    keyPress = (e: any) => {
+        if (e.keyCode === 13) {
+            this.setWeatherData();
+        }
     }
 
     setWeatherData() {
@@ -70,9 +85,13 @@ export default class App extends React.Component {
                         {/* city, country */}
                         Weather in {this.state.weatherData.name}, {this.state.weatherData.country}
                     </div>
-                    <div className={'app__header__input'}>
-                        <button onClick={this.setWeatherData}>REFRESH</button>
-                    </div>
+                    <SearchCityBar
+                        className={'app__header__search'}
+                        searchCity={this.state.searchCity}
+                        onChangeHandler={this.setSearchCity}
+                        onClickHandler={this.setWeatherData}
+                        onKeyDownHandler={this.keyPress}
+                    />
                 </header>
                 <section className={'app__panel'}>
                     {/* temperature */}
