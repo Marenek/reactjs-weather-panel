@@ -1,0 +1,13 @@
+// layout
+$gap: 4vmin;
+$media-mobile-limit: 520px;
+$media-desktop-limit: 1920px * 2/3;
+
+// colors
+$app-background: #282c34;
+$header-background: darken($app-background, 5%);
+$footer-background: $header-background;
+$panel-background: $app-background;
+$tile-background: #fefefe;
+$tile-color: #404040;
+
