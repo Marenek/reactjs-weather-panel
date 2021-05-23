@@ -3,7 +3,6 @@ import axios from 'axios';
 import {apiUrl, defaultCity, defaultWeatherData, getWeatherQuery} from "../../components/WeatherApiData";
 import {Tile} from '../../elements/Tile'
 import {SearchCityBar} from '../../components/SearchCityBar'
-import './App.scss';
 
 export default class App extends React.Component {
 
