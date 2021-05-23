@@ -66,14 +66,16 @@ export default class App extends React.Component {
         return (
             <div className={'app'}>
                 <header className={'app__header'}>
-                    <button onClick={this.setWeatherData}>REFRESH</button>
+                    <div className={'app__header__city'}>
+                        {/* city, country */}
+                        Weather in {this.state.weatherData.name}, {this.state.weatherData.country}
+                    </div>
+                    <div className={'app__header__input'}>
+                        <button onClick={this.setWeatherData}>REFRESH</button>
+                    </div>
                 </header>
                 <section className={'app__panel'}>
-                    {/* ity, country */}
-                    {this.state.weatherData.name},
-                    {this.state.weatherData.country}
-                    <br/>
-                    {/* actual and feelsLike temperature */}
+                    {/* temperature */}
                     <Tile
                         value={this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.actual)}
                         unit={' °C'}
@@ -81,6 +83,29 @@ export default class App extends React.Component {
                         valueAdd={this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.feelsLike)}
                         unitAdd={' °C'}
                         title={'Actual and apparent temperature'}
+                    />
+                    {/* summary */}
+                    <Tile
+                        value={this.state.weatherData.weather.summary.title}
+                        valueAdd={this.state.weatherData.weather.summary.description}
+                        title={'Weather summary'}
+                    />
+                    {/* clouds */}
+                    <Tile
+                        value={this.state.weatherData.weather.clouds.all}
+                        unit={' %'}
+                        prefixAdd={'Humidity '}
+                        valueAdd={this.state.weatherData.weather.clouds.humidity}
+                        unitAdd={' %'}
+                        title={'Clouds nad humidity'}
+                    />
+                    {/* wind */}
+                    <Tile
+                        value={this.state.weatherData.weather.wind.speed}
+                        unit={' m/s'}
+                        valueAdd={this.state.weatherData.weather.wind.deg}
+                        unitAdd={' °'}
+                        title={'Wind'}
                     />
                 </section>
                 <footer className={'app__footer'}>

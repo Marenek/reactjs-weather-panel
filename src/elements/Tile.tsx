@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const Tile = (props: any) => {
     let className = 'app__panel__tile';
