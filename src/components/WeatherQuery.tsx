@@ -1,8 +1,7 @@
-import {gql} from '@apollo/client';
-
-export const GET_WEATHER = gql`
-  query GetWeatherInCity($city:String!) {
-      getCityByName(name: $city) {
+export const getWeatherQuery = (city: string) => {
+    return `
+    query {
+      getCityByName(name: "${city}") {
         id
         name
         country
@@ -34,5 +33,6 @@ export const GET_WEATHER = gql`
           timestamp
         }
       }
-  }
-`;
+    }
+`
+};
