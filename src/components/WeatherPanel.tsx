@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {apiUrl, defaultCity, defaultWeatherData, getWeatherQuery} from "./WeatherApiData";
+import {Tile} from '../elements/Tile'
 
 export class WeatherPanel extends React.Component {
 
@@ -62,7 +63,7 @@ export class WeatherPanel extends React.Component {
 
     render() {
         return (
-            <p>
+            <section>
                 Weather Panel
                 <br/>
                 <button onClick={this.setWeatherData}>REFRESH</button>
@@ -72,13 +73,18 @@ export class WeatherPanel extends React.Component {
                 {this.state.weatherData.country}
                 <br/>
                 {/* actual and feelsLike temperature */}
-                {this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.actual)} /
-                {this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.feelsLike)}
-                <br/>
+                <Tile
+                    value={this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.actual)}
+                    unit={' °C'}
+                    prefixAdd={'Feels like '}
+                    valueAdd={this.convertKelvinToCelsius(this.state.weatherData.weather.temperature.feelsLike)}
+                    unitAdd={' °C'}
+                    title={'Actual and apparent temperature'}
+                />
                 {/* date time */}
                 {this.convertUnixTimestampToDateTime(this.state.weatherData.weather.timestamp)}
                 <br/>
-            </p>
+            </section>
         );
     }
 }
