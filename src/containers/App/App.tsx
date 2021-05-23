@@ -98,6 +98,7 @@ export default class App extends React.Component {
                     <Tile
                         value={this.state.weatherData.weather.summary.title}
                         valueAdd={this.state.weatherData.weather.summary.description}
+                        icon={this.state.weatherData.weather.summary.icon}
                         title={'Weather summary'}
                     />
                     {/* clouds */}
@@ -107,7 +108,7 @@ export default class App extends React.Component {
                         prefixAdd={'Humidity '}
                         valueAdd={this.state.weatherData.weather.clouds.humidity}
                         unitAdd={' %'}
-                        title={'Clouds nad humidity'}
+                        title={'Clouds and humidity'}
                     />
                     {/* wind */}
                     <Tile

@@ -28,6 +28,10 @@ export const defaultWeatherData = {
     }
 };
 
+export const getWeatherIconUrl = (icon: string) => {
+    return `https://openweathermap.org/img/wn/${icon}@4x.png`;
+}
+
 export const getWeatherQuery = (city: string) => {
     return `
     query {
