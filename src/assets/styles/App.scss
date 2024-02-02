@@ -64,8 +64,9 @@
             background: $tile-background;
             color: $tile-color;
             margin: $gap / 2;
-            width: calc(50% - #{$gap});
-            min-height: calc(50vh - #{6 * $gap});
+            flex: 1;
+            min-width: calc(50% - #{$gap});
+            //min-height: calc(50vh - #{6 * $gap});
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -74,7 +75,7 @@
 
             @media (min-width: $media-desktop-limit) {
                 width: auto;
-                flex: 1;
+                min-width: 0;
             }
 
             big {
@@ -87,6 +88,7 @@
                 font-size: calc(10px + 6vh);
                 line-height: 1em;
                 font-weight: bold;
+                white-space: nowrap;
             }
 
             small {
