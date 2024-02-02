@@ -2,6 +2,7 @@
   "name": "reactjs-weather-panel",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://graphql-weather-api.herokuapp.com",
   "author": "Marek Fišer",
   "license": "MIT",
   "dependencies": {
